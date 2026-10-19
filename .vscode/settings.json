@@ -1,0 +1,8 @@
+{
+  "explorer.compactFolders": false,
+  "explorer.fileNesting.enabled": true,
+  "explorer.fileNesting.expand": false,
+  "explorer.fileNesting.patterns": {
+    "package.json": ".editorconfig, .oxfmtrc.json, .oxlintrc.json, eslint.config.ts, pnpm-lock.yaml, pnpm-workspace.yaml, README.md, docker-compose.yml, .dockerignore, .gitignore, index.html, vite.config.ts"
+  }
+}

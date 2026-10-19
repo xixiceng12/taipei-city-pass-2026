@@ -1,0 +1,62 @@
+version: '3.8'
+
+services:
+  # ==========================================
+  # 1. 台北城市通 - 資料庫 (PostgreSQL + PostGIS 地理位置外掛)
+  # ==========================================
+  taipei-db:
+    image: postgis/postgis:16-3.4-alpine
+    container_name: taipei-city-db
+    environment:
+      POSTGRES_USER: taipei_admin
+      POSTGRES_PASSWORD: taipei_password_2026  # 密碼記得之後要換掉
+      POSTGRES_DB: taipei_city_pass
+      TZ: Asia/Taipei
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - taipei-network
+
+  # ==========================================
+  # 2. 台北城市通 - 快取 (Redis)
+  # ==========================================
+  taipei-redis:
+    image: redis:7.2-alpine
+    container_name: taipei-city-redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    networks:
+      - taipei-network
+
+  # ==========================================
+  # 3. 台北城市通 - Java 核心後端
+  # ==========================================
+  taipei-backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: taipei-city-backend
+    ports:
+      - "8080:8080"
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://taipei-db:5432/taipei_city_pass
+      - SPRING_DATASOURCE_USERNAME=taipei_admin
+      - SPRING_DATASOURCE_PASSWORD=taipei_password_2026
+      - SPRING_DATA_REDIS_HOST=taipei-redis
+    depends_on:
+      - taipei-db
+      - taipei-redis
+    networks:
+      - taipei-network
+
+volumes:
+  postgres_data:
+  redis_data:
+
+networks:
+  taipei-network:
+    driver: bridge

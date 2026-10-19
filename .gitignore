@@ -1,42 +1,25 @@
-# Logs
-logs
-*.log
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-pnpm-debug.log*
-lerna-debug.log*
-
-node_modules
-.DS_Store
-dist
-dist-ssr
-coverage
-*.local
-
-# Editor directories and files
-.vscode/*
-!.vscode/extensions.json
-.idea
-*.suo
-*.ntvs*
-*.njsproj
-*.sln
-*.sw?
-
-*.tsbuildinfo
-
-.eslintcache
-
-# Cypress
-/cypress/videos/
-/cypress/screenshots/
-
-# Vitest
-__screenshots__/
-
-# Vite
-*.timestamp-*-*.mjs
-
+# ==========================================
+# 1. 根目錄 Vue 垃圾過濾 (對應你們目前的結構)
+# ==========================================
+node_modules/
+.pnpm-store/
+dist/
+.playwright/
 test-results/
 playwright-report/
+
+# ==========================================
+# 2. 內部 backend 資料夾 Java 垃圾過濾
+# ==========================================
+backend/target/
+backend/*.jar
+backend/.idea/
+backend/*.iml
+
+# ==========================================
+# 3. 系統與本地環境變數
+# ==========================================
+.env*.local
+.DS_Store
+Thumbs.db
+.docker-data/

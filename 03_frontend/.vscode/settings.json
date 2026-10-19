@@ -1,0 +1,72 @@
+{
+  // ==========================================
+  // 1. 預設保留：檔案巢狀摺疊（讓側邊欄乾淨的神功能）
+  // ==========================================
+  "explorer.fileNesting.enabled": true,
+  "explorer.fileNesting.expand": false,
+  "explorer.fileNesting.patterns": {
+    "tsconfig.json": "tsconfig.*.json, env.d.ts, typed-router.d.ts",
+    "vite.config.*": "jsconfig*, vitest.config.*, cypress.config.*, playwright.config.*",
+    "package.json": "package-lock.json, pnpm*, .yarnrc*, yarn*, .eslint*, eslint*, .oxlint*, oxlint*, .oxfmt*, .prettier*, prettier*, .editorconfig, bun.lock, pub.lock, .gitignore, .dockerignore, docker-compose.yml, docker-compose.yml, vite.config.ts, README.md",
+    "index.html": "_index.html"
+  },
+
+  // ==========================================
+  // 2. 核心設定：開啟存檔自動格式化與修復
+  // ==========================================
+  "editor.formatOnSave": true,
+  "editor.codeActionsOnSave": {
+    "source.fixAll": "explicit", // 觸發通用錯誤修正
+    "source.fixAll.oxc": "explicit", // 觸發 oxc 引擎修復與格式化
+    "source.organizeImports": "explicit" // 存檔時自動排序 import，維持程式碼潔癖
+  },
+  "editor.defaultFormatter": "oxc.oxc-vscode", // 全域預設交給 Oxfmt
+
+  // ==========================================
+  // 3. 指定不同檔案類型的格式化工具（全數交給 Oxfmt 處理）
+  // ==========================================
+  "[javascript]": {
+    "editor.defaultFormatter": "oxc.oxc-vscode"
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "oxc.oxc-vscode"
+  },
+  "[javascriptreact]": {
+    "editor.defaultFormatter": "oxc.oxc-vscode"
+  },
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "oxc.oxc-vscode"
+  },
+  "[json]": {
+    "editor.defaultFormatter": "oxc.oxc-vscode"
+  },
+  "[jsonc]": {
+    "editor.defaultFormatter": "oxc.oxc-vscode"
+  },
+  "[css]": {
+    "editor.defaultFormatter": "oxc.oxc-vscode"
+  },
+  "[less]": {
+    "editor.defaultFormatter": "oxc.oxc-vscode"
+  },
+  "[scss]": {
+    "editor.defaultFormatter": "oxc.oxc-vscode"
+  },
+
+  // ==========================================
+  // 4. Vue 3.6 核心與開發環境優化設定
+  // ==========================================
+  "[vue]": {
+    "editor.defaultFormatter": "Vue.volar" // Vue 單檔組件由 Vue 官方套件接管解析
+  },
+  "vue.features.typescript.dotExtensions": true,
+  "oxc.enable": true,
+  "oxc.path": "",
+
+  // ==========================================
+  // 5. 團隊跨平台開發防呆（Windows/Mac 混合團隊必備）
+  // ==========================================
+  "files.eol": "\n", // 統一換行符號為 LF，進 Git 絕不衝突
+  "files.insertFinalNewline": true, // 檔案末尾自動保留一行空白
+  "files.trimTrailingWhitespace": true // 自動刪除行尾沒用的空格
+}
